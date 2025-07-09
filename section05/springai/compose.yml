@@ -1,0 +1,6 @@
+services:
+  qdrant:
+    image: 'qdrant/qdrant:latest'
+    ports:
+      - '6333:6333'
+      - '6334:6334'
