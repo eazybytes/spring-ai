@@ -1,0 +1,40 @@
+services:
+  qdrant:
+    image: 'qdrant/qdrant:latest'
+    ports:
+      - '6333:6333'
+      - '6334:6334'
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - "./prometheus-config.yml:/etc/prometheus/prometheus.yml"
+    networks:
+      - spring-ai
+    ports:
+      - 9090:9090
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - '3000:3000'
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    networks:
+      - spring-ai
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686"
+      - "4317:4317"
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    networks:
+      - spring-ai
+
+networks:
+  spring-ai:
+    driver: bridge
+
+volumes:
+  grafana-storage:
