@@ -1,5 +1,6 @@
 # From Java Dev to AI Engineer: Spring AI Fast Track
 
+[![SafeSkill 92/100](https://img.shields.io/badge/SafeSkill-92%2F100_Verified%20Safe-brightgreen)](https://safeskill.dev/scan/eazybytes-spring-ai)
 ## 🌱 Spring AI Course – Resources & Reference Links
 
 Welcome to the official GitHub repository for the **Spring AI Course**. This course helps you build intelligent applications using the Spring AI framework and integrate powerful LLMs like OpenAI into your Spring Boot apps.
