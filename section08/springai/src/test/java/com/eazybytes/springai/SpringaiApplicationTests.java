@@ -17,6 +17,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.test.context.TestPropertySource;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -39,6 +40,8 @@ class SpringaiApplicationTests {
     private ChatClient chatClient;
     private RelevancyEvaluator relevancyEvaluator;
     private FactCheckingEvaluator factCheckingEvaluator;
+    @Value("classpath:/promptTemplates/factcheck.st")
+    Resource factCheckTemplate;
 
     // Minimum acceptable relevancy score
     @Value("${test.relevancy.min-score:0.7}")
@@ -48,12 +51,14 @@ class SpringaiApplicationTests {
     Resource hrPolicyTemplate;
 
     @BeforeEach
-    void setup() {
+    void setup() throws IOException {
         ChatClient.Builder chatClientBuilder =
                 ChatClient.builder(chatModel).defaultAdvisors(new SimpleLoggerAdvisor());
         this.chatClient = chatClientBuilder.build();
         this.relevancyEvaluator = new RelevancyEvaluator(chatClientBuilder);
-        this.factCheckingEvaluator = new FactCheckingEvaluator(chatClientBuilder);
+        // Create the FactCheckingEvaluator
+        this.factCheckingEvaluator = FactCheckingEvaluator.builder(chatClientBuilder)
+                .evaluationPrompt(factCheckTemplate.getContentAsString(Charset.defaultCharset())).build();
     }
 
     @Test

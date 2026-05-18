@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.List;
 
 @RestController
@@ -27,10 +29,12 @@ public class SelfEvaluatingChatController {
     @Value("classpath:/promptTemplates/hrPolicy.st")
     Resource hrPolicyTemplate;
 
-    public SelfEvaluatingChatController(ChatClient.Builder chatClientBuilder) {
+    public SelfEvaluatingChatController(ChatClient.Builder chatClientBuilder,
+            @Value("classpath:/promptTemplates/factcheck.st") Resource factCheckTemplate) throws IOException {
         this.chatClient = chatClientBuilder.defaultAdvisors(new SimpleLoggerAdvisor())
                 .build();
-        this.factCheckingEvaluator = new FactCheckingEvaluator(chatClientBuilder);
+        this.factCheckingEvaluator = FactCheckingEvaluator.builder(chatClientBuilder)
+                .evaluationPrompt(factCheckTemplate.getContentAsString(Charset.defaultCharset())).build();
     }
 
     @Retryable(retryFor =  InvalidAnswerException.class,maxAttempts = 3)
