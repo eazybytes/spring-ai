@@ -27,7 +27,8 @@ public class PromptStuffingController {
     public String promptStuffing(@RequestParam("message") String message) {
         return chatClient
                 .prompt()
-                .options(OpenAiChatOptions.builder().model(ChatModel.GPT_5_4_MINI.asString())/*.maxCompletionTokens(20)*/)
+                .options(OpenAiChatOptions.builder().model(ChatModel.GPT_5_4_NANO.asString())
+                        .temperature(0.7))
                 .system(systemPromptTemplate)
                 .user(message)
                 .call().content();
