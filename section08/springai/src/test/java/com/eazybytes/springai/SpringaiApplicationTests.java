@@ -40,12 +40,13 @@ class SpringaiApplicationTests {
     private ChatClient chatClient;
     private RelevancyEvaluator relevancyEvaluator;
     private FactCheckingEvaluator factCheckingEvaluator;
-    @Value("classpath:/promptTemplates/factcheck.st")
-    Resource factCheckTemplate;
 
     // Minimum acceptable relevancy score
     @Value("${test.relevancy.min-score:0.7}")
     private float minRelevancyScore;
+
+    @Value("classpath:/promptTemplates/factcheck.st")
+    Resource factCheckTemplate;
 
     @Value("classpath:/promptTemplates/hrPolicy.st")
     Resource hrPolicyTemplate;
@@ -56,9 +57,9 @@ class SpringaiApplicationTests {
                 ChatClient.builder(chatModel).defaultAdvisors(new SimpleLoggerAdvisor());
         this.chatClient = chatClientBuilder.build();
         this.relevancyEvaluator = new RelevancyEvaluator(chatClientBuilder);
-        // Create the FactCheckingEvaluator
         this.factCheckingEvaluator = FactCheckingEvaluator.builder(chatClientBuilder)
-                .evaluationPrompt(factCheckTemplate.getContentAsString(Charset.defaultCharset())).build();
+                .evaluationPrompt(factCheckTemplate.getContentAsString(Charset.defaultCharset()))
+                .build();
     }
 
     @Test
@@ -107,15 +108,18 @@ class SpringaiApplicationTests {
         EvaluationRequest evaluationRequest = new EvaluationRequest(question, aiResponse);
         EvaluationResponse response = factCheckingEvaluator.evaluate(evaluationRequest);
 
-        Assertions.assertAll(() -> assertThat(aiResponse).isNotBlank(),
+        // Then
+        Assertions.assertAll(
+                () -> assertThat(aiResponse).isNotBlank(),
                 () -> assertThat(response.isPass())
                         .withFailMessage("""
-                             ========================================
-                             The answer was not considered factually correct.
-                             Question: "%s"
-                             Response: "%s"
-                             ========================================
-                                """, question, aiResponse)
+                        ========================================
+                        The response was not considered factually accurate.
+                        Question: %s
+                        Response: %s
+                        Context: %s
+                        ========================================
+                        """, question, aiResponse, "")
                         .isTrue());
 
     }
@@ -129,12 +133,10 @@ class SpringaiApplicationTests {
 
         // When
         String aiResponse = chatController.promptStuffing(question);
-
-        String retrievedContext = hrPolicyTemplate.getContentAsString(StandardCharsets.UTF_8);
+        String retrievedContext = hrPolicyTemplate.getContentAsString(Charset.defaultCharset());
 
         EvaluationRequest evaluationRequest = new EvaluationRequest(
-                question,
-                List.of(new Document(retrievedContext)),
+                question,List.of(new Document(retrievedContext)),
                 aiResponse
         );
 
