@@ -28,7 +28,7 @@ public class ImageController {
     String genateImageWithOptions(@RequestParam("message") String message) {
         var imageResponse = imageModel.call(new ImagePrompt(message,
                 OpenAiImageOptions.builder()
-                        .N(1)
+                        .n(1)
                         .model("gpt-image-2").build()));
         return imageResponse.getResults().get(0).getOutput().getB64Json();
     }
