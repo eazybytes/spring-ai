@@ -30,7 +30,7 @@ public class HelpDeskController {
                 .advisors(a -> a.param(CONVERSATION_ID, username))
                 .user(message)
                 .tools(helpDeskTools)
-                .tools(toolSpec -> toolSpec.context(Map.of("username", username)))
+                .toolContext(Map.of("username", username))
                 .call().content();
         return ResponseEntity.ok(answer);
     }
