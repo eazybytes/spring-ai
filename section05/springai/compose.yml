@@ -4,3 +4,7 @@ services:
     ports:
       - '6333:6333'
       - '6334:6334'
+#  redis:
+#    image: 'redis:latest'
+#    ports:
+#      - '6379:6379'

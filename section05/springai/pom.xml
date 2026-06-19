@@ -63,6 +63,10 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.ai</groupId>
+			<artifactId>spring-ai-redis-semantic-cache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.ai</groupId>
 			<artifactId>spring-ai-rag</artifactId>
 		</dependency>
 		<dependency>
