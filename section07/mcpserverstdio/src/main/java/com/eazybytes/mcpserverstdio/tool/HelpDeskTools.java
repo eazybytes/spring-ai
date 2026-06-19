@@ -6,6 +6,8 @@ import com.eazybytes.mcpserverstdio.service.HelpDeskTicketService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.ai.mcp.annotation.McpTool;
+import org.springframework.ai.mcp.annotation.McpToolParam;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.stereotype.Component;
@@ -20,8 +22,8 @@ public class HelpDeskTools {
 
     private final HelpDeskTicketService service;
 
-    @Tool(name = "createTicket", description = "Create the Support Ticket")
-    String createTicket(@ToolParam(description = "Details to create a Support ticket")
+    @McpTool(name = "createTicket", description = "Create the Support Ticket")
+    String createTicket(@McpToolParam(description = "Details to create a Support ticket")
     TicketRequest ticketRequest) {
         LOGGER.info("Creating support ticket for user: {} with details: {}", ticketRequest);
         HelpDeskTicket savedTicket = service.createTicket(ticketRequest);
@@ -29,8 +31,8 @@ public class HelpDeskTools {
         return "Ticket #" + savedTicket.getId() + " created successfully for user " + savedTicket.getUsername();
     }
 
-    @Tool(name="getTicketStatus", description = "Fetch the status of the tickets based on a given username")
-    List<HelpDeskTicket> getTicketStatus(@ToolParam(description =
+    @McpTool(name="getTicketStatus", description = "Fetch the status of the tickets based on a given username")
+    List<HelpDeskTicket> getTicketStatus(@McpToolParam(description =
             "Username to fetch the status of the help desk tickets") String username) {
         LOGGER.info("Fetching tickets for user: {}", username);
         List<HelpDeskTicket> tickets =  service.getTicketsByUsername(username);
