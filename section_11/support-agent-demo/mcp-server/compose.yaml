@@ -1,0 +1,28 @@
+services:
+  mysql:
+    image: 'mysql:latest'
+    container_name: 'support-agent-mysql'
+    environment:
+      - 'MYSQL_DATABASE=mydatabase'
+      - 'MYSQL_USER=myuser'
+      - 'MYSQL_PASSWORD=secret'
+      - 'MYSQL_ROOT_PASSWORD=verysecret'
+    ports:
+      - '3306:3306'
+    volumes:
+      # Named volume -> data survives container restarts / recreation.
+      - 'mysql-data:/var/lib/mysql'
+      # Scripts here run automatically the FIRST time the data dir is empty
+      # (i.e. on a fresh volume) to create the schema and load demo data.
+      - './db/init:/docker-entrypoint-initdb.d:ro'
+    healthcheck:
+      test: [ 'CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-uroot', '-pverysecret' ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+# Top-level named volume keeps the MySQL data files on the host's Docker
+# storage so nothing is lost when the container stops or is recreated.
+volumes:
+  mysql-data:

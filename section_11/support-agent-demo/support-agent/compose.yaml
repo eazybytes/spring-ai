@@ -1,0 +1,19 @@
+services:
+  # Mailpit = a fake SMTP server with a built-in web UI and REST API.
+  # The agent seeds/receives mail over SMTP (1025) and monitors the inbox
+  # over the REST API (8025). Browse the inbox visually at http://localhost:8025.
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: support-agent-mail
+    restart: unless-stopped
+    volumes:
+      - ./data:/data
+    environment:
+      # Accept mail from any (or no) SMTP auth - convenient for a sandbox.
+      MP_SMTP_AUTH_ACCEPT_ANY: "1"
+      MP_SMTP_AUTH_ALLOW_INSECURE: "1"
+      MP_MAX_MESSAGES: 5000
+      MP_DATABASE: /data/mailpit.db
+    ports:
+      - "1025:1025"   # SMTP        (send/seed mail)
+      - "8025:8025"   # Web UI + REST API (monitor the inbox)
