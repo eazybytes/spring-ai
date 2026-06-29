@@ -292,7 +292,7 @@
             "header": [
               {
                 "key": "username",
-                "value": "madan01",
+                "value": "madan104",
                 "type": "text"
               }
             ],
@@ -329,7 +329,7 @@
             "header": [
               {
                 "key": "username",
-                "value": "madan118",
+                "value": "madan119",
                 "type": "text"
               }
             ],
@@ -363,12 +363,12 @@
             "header": [
               {
                 "key": "username",
-                "value": "madan16",
+                "value": "madan24",
                 "type": "text"
               }
             ],
             "url": {
-              "raw": "http://localhost:8080/api/rag/document/chat?message=what is the notice period ?",
+              "raw": "http://localhost:8080/api/rag/document/chat?message=What is the notice period ?",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -383,7 +383,7 @@
               "query": [
                 {
                   "key": "message",
-                  "value": "what is the notice period ?"
+                  "value": "What is the notice period ?"
                 }
               ]
             }
@@ -423,6 +423,32 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "OpenChat",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/open-chat?message=What is the capital of India ?",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "open-chat"
+              ],
+              "query": [
+                {
+                  "key": "message",
+                  "value": "What is the capital of India ?"
+                }
+              ]
+            }
+          },
+          "response": []
         }
       ]
     },
@@ -436,7 +462,7 @@
             "header": [
               {
                 "key": "username",
-                "value": "madan24",
+                "value": "madan01",
                 "type": "text"
               }
             ],
@@ -469,7 +495,7 @@
             "header": [
               {
                 "key": "username",
-                "value": "madan21",
+                "value": "madan01",
                 "type": "text"
               }
             ],
@@ -510,12 +536,12 @@
             "header": [
               {
                 "key": "username",
-                "value": "madan29",
+                "value": "madan52",
                 "type": "text"
               }
             ],
             "url": {
-              "raw": "http://localhost:8080/api/chat?message=what is the status of my ticket",
+              "raw": "http://localhost:8080/api/chat?message=My VPN is not working. Raise a new ticket",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -528,8 +554,37 @@
               "query": [
                 {
                   "key": "message",
-                  "value": "what is the status of my ticket"
+                  "value": "My VPN is not working. Raise a new ticket"
                 }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "MCPSampling",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "username",
+                "value": "madan41",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/summarize-tickets",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "summarize-tickets"
               ]
             }
           },
@@ -711,6 +766,203 @@
                   "key": "message",
                   "value": "A realistic football player running with the ball in a crowded stadium under bright lights, cinematic sports photography, natural colors, detailed grass, realistic motion, high quality, photorealistic."
                 }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Section_11",
+      "item": [
+        {
+          "name": "Priya_ChargedTwice",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "username",
+                "value": "madan106",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "from",
+                  "value": "priya.sharma@example.com",
+                  "type": "text",
+                  "uuid": "13add5c7-1557-4f16-bbd2-d6e0c51f48a4"
+                },
+                {
+                  "key": "subject",
+                  "value": "Charged twice for order 4471",
+                  "type": "text",
+                  "uuid": "eeb68dd0-2b07-49bd-bebb-7982aec81641"
+                },
+                {
+                  "key": "body",
+                  "value": "Hi, I was charged twice for my order 4471 — I see two charges of  $199.99 on my card. Please refund the duplicate",
+                  "type": "text",
+                  "uuid": "5435eee0-b801-4593-868a-16deaa42b06a"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8080/seed-mail",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "seed-mail"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sarah_Escalation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "username",
+                "value": "madan106",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "from",
+                  "value": "sarah.mitchell@example.com",
+                  "type": "text",
+                  "uuid": "13add5c7-1557-4f16-bbd2-d6e0c51f48a4"
+                },
+                {
+                  "key": "subject",
+                  "value": "What's wrong with you guys",
+                  "type": "text",
+                  "uuid": "eeb68dd0-2b07-49bd-bebb-7982aec81641"
+                },
+                {
+                  "key": "body",
+                  "value": "For the third time in a row, I received a blender with a cracked jug. I no more want to take this stress. Give me my money back",
+                  "type": "text",
+                  "uuid": "5435eee0-b801-4593-868a-16deaa42b06a"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8080/seed-mail",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "seed-mail"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Rohan_Hindi_Sarcastic",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "username",
+                "value": "madan106",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "from",
+                  "value": "rohan.verma@example.com",
+                  "type": "text",
+                  "uuid": "13add5c7-1557-4f16-bbd2-d6e0c51f48a4"
+                },
+                {
+                  "key": "subject",
+                  "value": "Wah, kya service hai",
+                  "type": "text",
+                  "uuid": "eeb68dd0-2b07-49bd-bebb-7982aec81641"
+                },
+                {
+                  "key": "body",
+                  "value": " Wah, kya kamaal ka service hai. My BrewWell kettle from order #4502 stopped heating after exactly one week — paisa vasool, truly. \n  ▎ Aur waise bhi, jab aap is \"premium\" quality ko sambhal hi rahe ho, the HushMix hand mixer in the same box sounds like a cement \n  ▎ mixer, bilkul bhi \"quiet\" nahi hai jaisa aapne apne website pe likha tha. Do me a favour and sort both out, warna agli baar main \n  ▎ seedha review likhne wala hoon. Thanks a ton. 🙏",
+                  "type": "text",
+                  "uuid": "5435eee0-b801-4593-868a-16deaa42b06a"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8080/seed-mail",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "seed-mail"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "UnknownCustomer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "username",
+                "value": "madan106",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "from",
+                  "value": "madan@gmail.com",
+                  "type": "text",
+                  "uuid": "13add5c7-1557-4f16-bbd2-d6e0c51f48a4"
+                },
+                {
+                  "key": "subject",
+                  "value": "Warranty of ZenFlow Yoga Mat",
+                  "type": "text",
+                  "uuid": "eeb68dd0-2b07-49bd-bebb-7982aec81641"
+                },
+                {
+                  "key": "body",
+                  "value": "What is the warranty of ZenFlow Yoga Mat ? I am considering to buy",
+                  "type": "text",
+                  "uuid": "5435eee0-b801-4593-868a-16deaa42b06a"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8080/seed-mail",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "seed-mail"
               ]
             }
           },
