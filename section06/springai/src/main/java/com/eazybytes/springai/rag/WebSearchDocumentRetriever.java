@@ -1,5 +1,6 @@
 package com.eazybytes.springai.rag;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import org.slf4j.Logger;
@@ -78,7 +79,8 @@ public class WebSearchDocumentRetriever implements DocumentRetriever {
     }
 
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-    record TavilyRequestPayload(String query, String searchDepth, int maxResults) {}
+    record TavilyRequestPayload(String query, @JsonProperty("search_depth")
+    String searchDepth, @JsonProperty("max_results") int maxResults) {}
 
     record TavilyResponsePayload(List<Hit> results) {
         record Hit(String title, String url, String content, Double score) {}
